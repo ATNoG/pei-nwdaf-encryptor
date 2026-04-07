@@ -1,10 +1,13 @@
+from typing import Optional
+
+
 class EncryptorBase:
-    
+
     def __init__(self) -> None:
-        pass
+        self._shared_key: Optional[bytes] = None
 
-    def encrypt(self, data, key) -> bytes:
-        pass
+    def encrypt(self, data: bytes) -> bytes:
+        raise NotImplementedError
 
-    def decrypt(self, encrypted_data, key) -> bytes:
-        pass
+    def decrypt(self, encrypted_data: bytes) -> bytes:
+        raise NotImplementedError
