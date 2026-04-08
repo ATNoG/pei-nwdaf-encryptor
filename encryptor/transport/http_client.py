@@ -3,7 +3,7 @@ This should be responsible for wrapping the key-exchange requests
 """
 
 import httpx
-from crypto.encryptor import Encryptor
+from encryptor.crypto.encryptor import Encryptor
 
 
 class HttpClient:

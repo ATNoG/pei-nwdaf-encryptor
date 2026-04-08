@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from crypto.encryptor import Encryptor
-from server.router import router as handshake_router
+from encryptor.server.router import router as handshake_router
 
 
 @asynccontextmanager

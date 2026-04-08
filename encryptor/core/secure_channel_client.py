@@ -1,6 +1,6 @@
-from core.secure_channel_base import EncryptorBase
+from encryptor.core.secure_channel_base import EncryptorBase
 from crypto.encryptor import Encryptor
-from transport.http_client import HttpClient
+from encryptor.transport.http_client import HttpClient
 
 
 class EncryptorClient(EncryptorBase):

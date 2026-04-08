@@ -2,8 +2,8 @@
 This should be the exposed interface for users
 """
 
-from core.secure_channel_base import EncryptorBase
-from server.app import app as fastapi_app
+from encryptor.core.secure_channel_base import EncryptorBase
+from encryptor.server.app import app as fastapi_app
 
 
 class EncryptorServer(EncryptorBase):

@@ -3,8 +3,8 @@ This should be responsible for exposing the endpoints needed for the key exchang
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Request
-from server.schemas import HandshakeRequest, HandshakeResponse
-from crypto.encryptor import Encryptor
+from encryptor.server.schemas import HandshakeRequest, HandshakeResponse
+from encryptor.crypto.encryptor import Encryptor
 
 router = APIRouter(tags=["Handshake"])
 
