@@ -2,7 +2,7 @@
 import pytest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'encryptor'))
 
 from fastapi.testclient import TestClient
 from server.app import create_app

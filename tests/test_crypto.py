@@ -4,7 +4,7 @@ from cryptography.hazmat.primitives.asymmetric import dh
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'encryptor'))
 
 from crypto.CipherStrategy import CipherStrategy, AESGCMStrategy
 from crypto.encryptor import Encryptor

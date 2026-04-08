@@ -2,7 +2,7 @@
 import pytest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'encryptor'))
 
 from server.app import app as fastapi_app
 from core.secure_channel_server import EncryptorServer
