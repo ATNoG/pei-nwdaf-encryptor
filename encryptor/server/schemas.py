@@ -7,5 +7,6 @@ class HandshakeRequest(BaseModel):
 
 
 class HandshakeResponse(BaseModel):
-    public_key: str  # PEM
-    salt: str        # hex — echoed from client's request
+    public_key: str     # PEM
+    salt: str           # hex — echoed from client's request
+    session_token: str  # UUID identifying this client's shared key

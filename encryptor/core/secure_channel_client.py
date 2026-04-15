@@ -9,9 +9,15 @@ class EncryptorClient(EncryptorBase):
         super().__init__()
         self._encryptor = Encryptor()
         self._http_client = HttpClient(self._encryptor)
+        self._session_token: str | None = None
+
+    @property
+    def session_token(self) -> str | None:
+        """Session token assigned by the server during handshake."""
+        return self._session_token
 
     def handshake(self, url: str) -> None:
-        self._shared_key = self._http_client.handshake(url)
+        self._shared_key, self._session_token = self._http_client.handshake(url)
 
     def encrypt(self, data: bytes) -> bytes:
         if self._shared_key is None:

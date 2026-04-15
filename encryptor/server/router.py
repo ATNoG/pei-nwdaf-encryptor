@@ -2,6 +2,8 @@
 This should be responsible for exposing the endpoints needed for the key exchange
 """
 
+import uuid
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from encryptor.server.schemas import HandshakeRequest, HandshakeResponse
 from encryptor.crypto.encryptor import Encryptor
@@ -29,9 +31,15 @@ async def handshake(
         shared_key: bytes = encryptor.derive_shared_key(client_pub_pem, client_salt)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid public key: {e}")
-    request.app.state.shared_key = shared_key
+
+    session_token = str(uuid.uuid4())
+    # Store per-session key; each client gets its own isolated entry
+    if not hasattr(request.app.state, "session_keys"):
+        request.app.state.session_keys = {}
+    request.app.state.session_keys[session_token] = shared_key
 
     return HandshakeResponse(
         public_key=encryptor.get_public_key().decode(),
         salt=body.salt,
+        session_token=session_token,
     )
