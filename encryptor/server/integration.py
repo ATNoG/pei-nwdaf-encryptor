@@ -49,8 +49,8 @@ def integrate_encryptor(app: FastAPI, prefix: str = "/crypto") -> None:
         try:
             encrypted = app.state.encryptor.encrypt(body, shared_key)
             headers = dict(response.headers)
+            headers.pop("content-length", None)
             headers["X-Encrypted"] = "true"
-            headers["Content-Length"] = str(len(encrypted))
             return Response(
                 content=encrypted,
                 status_code=response.status_code,
@@ -62,8 +62,10 @@ def integrate_encryptor(app: FastAPI, prefix: str = "/crypto") -> None:
             logging.getLogger(__name__).warning(
                 "Response encryption failed, returning plaintext: %s", exc
             )
+            headers = dict(response.headers)
+            headers.pop("content-length", None)
             return Response(
                 content=body,
                 status_code=response.status_code,
-                headers=dict(response.headers),
+                headers=headers,
             )
