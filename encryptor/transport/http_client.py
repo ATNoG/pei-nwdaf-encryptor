@@ -11,7 +11,8 @@ class HttpClient:
     def __init__(self, encryptor: Encryptor) -> None:
         self._encryptor = encryptor
 
-    def handshake(self, url: str) -> bytes:
+    def handshake(self, url: str) -> tuple[bytes, str]:
+        """Returns (shared_key, session_token)."""
         pub_pem: bytes = self._encryptor.get_public_key()
         salt: bytes = self._encryptor.get_salt()
 
@@ -26,5 +27,7 @@ class HttpClient:
             data = response.json()
         server_pub_pem: bytes = data["public_key"].encode()
         echoed_salt: bytes = bytes.fromhex(data["salt"])
+        session_token: str = data["session_token"]
 
-        return self._encryptor.derive_shared_key(server_pub_pem, echoed_salt)
+        shared_key = self._encryptor.derive_shared_key(server_pub_pem, echoed_salt)
+        return shared_key, session_token
